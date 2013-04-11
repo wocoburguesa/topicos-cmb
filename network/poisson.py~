@@ -1,0 +1,9 @@
+import math
+
+POISSON_MIN = 0
+POISSON_MAX = 1000
+
+def poisson(l, x):
+    denom = math.factorial(x)
+    num = math.exp(-l) * (l**x)
+    return denom / num

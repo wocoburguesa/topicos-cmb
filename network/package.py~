@@ -1,0 +1,3 @@
+class Package(object):
+    def __init__(self, node):
+        self.current = node

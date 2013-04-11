@@ -1,0 +1,12 @@
+class Node(object):
+    
+    def __init__(self, _id):
+        self.id = _id
+        self.links = []
+    
+    
+
+class Network(object):
+
+    def __init__(self):
+        
