@@ -7,7 +7,6 @@ class Node(object):
     def add_link(self, node):
         if node not in self.neighbors:
             self.neighbors.append(node)
-            node.neighbors.append(self)
 
 class Network(object):
 
@@ -16,4 +15,5 @@ class Network(object):
                  links):
         self.nodes = [Node(x) for x in range(nodes)]
         for link in links:
-            self.nodes[link[0]].add_link(nodes[link[1]])
+            self.nodes[link[0]].add_link(link[1])
+            self.nodes[link[1]].add_link(link[0])
