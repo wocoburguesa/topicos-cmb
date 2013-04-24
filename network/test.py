@@ -18,8 +18,12 @@ if __name__ == '__main__':
         (14, 3),
         (15, 4), (15, 6), (15, 11)
         ]
-    net = Network(15, links, 1)
+
+
+    net = Network(15, links, 5)
+
     print net
+
     while 1:
         raw_input()
         net.step()

@@ -31,7 +31,7 @@ class Package(object):
 
     def __str__(self):
         return "<PACKAGE CURRENT_POS=%d DESTINATION=%d>" % (
-            self.current, self.destination)
+            self.current+1, self.destination+1)
 
 class Network(object):
 
@@ -52,9 +52,9 @@ class Network(object):
             self.nodes[link[1]-1].add_link(self.nodes[link[0]-1])
 
         self.packages = []
+        self.generate_packages()
 
     def step(self):
-        self.generate_packages()
         for pack in self.packages:
             if len(pack.path) == 0:
                 self.nodes[pack.current].remove_package()
@@ -65,6 +65,12 @@ class Network(object):
             self.nodes[pack.current].remove_package()
             pack.current = pack.path.pop()
             self.nodes[pack.current].add_package()
+
+        for pack in self.packages:
+            print pack
+            print [x+1 for x in pack.path]
+            self.nodes[pack.current].add_package()
+        self.generate_packages()
 
     def generate_packages(self, lamb=None):
         if lamb:
@@ -78,12 +84,8 @@ class Network(object):
                 destination = random.randint(0, len(self.nodes)-1)
             path = self.make_path(origin, destination)
             path.pop()
+            self.nodes[origin].add_package()
             self.packages.append(Package(origin, destination, path))
-
-        for pack in self.packages:
-#            print pack
-#            print pack.path
-            self.nodes[pack.current].add_package()
 
     def make_path(self, start, end):
         return self.bfs(start, end, {start: -1}, [])
